@@ -5,17 +5,31 @@ body {
 .simon {
     border-style: solid;
     border-radius: 100%;
-    height: 25em;
-    width: 25em;
+    height: 26.5em;
+    width: 26.5em;
     margin: 0 auto;
 }
 
 .btn { 
-    position: relative;
     display: inline-block;
-    width: 10em;
-    height: 10em;
+    width: 11em;
+    height: 11em;
     cursor: pointer;
+}
+
+.middle {
+    position: absolute;
+    height: 7em;
+    width: 7em;
+    top: 29%;
+    left: 45.8%;
+    border-radius: 100%;
+    background: white;
+}
+
+.centered {
+    margin-top: 2em;
+    margin-left: 2em;
 }
 
 #top-left-btn {
