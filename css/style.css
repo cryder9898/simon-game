@@ -1,0 +1,61 @@
+body {
+    width: 100%
+}
+
+.simon {
+    border-style: solid;
+    border-radius: 10em;
+    height: 20em;
+    width: 20em;
+    margin: 0 auto;
+}
+
+.top-left-btn, 
+.top-right-btn, 
+.bottom-left-btn, 
+.bottom-right-btn {
+    position: absolute;
+    border-color: transparent;
+    cursor: pointer;
+    margin-top: 40px;
+    height: 6em;
+    width: 6em;
+    border-radius: 10em;
+    border-style: solid;
+    border-width: 80px;
+}
+
+.top-left-btn {
+    border-left-color: red;
+    -ms-transform: rotate(45deg); /* IE 9 */
+    -webkit-transform: rotate(45deg); /* Safari */
+    transform: rotate(45deg); /* Standard syntax */
+}
+
+.bottom-right-btn {
+    border-right-color: blue;
+    -ms-transform: rotate(45deg); /* IE 9 */
+    -webkit-transform: rotate(45deg); /* Safari */
+    transform: rotate(45deg); /* Standard syntax */
+}
+
+.bottom-left-btn {
+    border-bottom-color: green;
+    -ms-transform: rotate(45deg); /* IE 9 */
+    -webkit-transform: rotate(45deg); /* Safari */
+    transform: rotate(45deg); /* Standard syntax */
+}
+
+.top-right-btn {
+    border-top-color: yellow;
+    -ms-transform: rotate(45deg); /* IE 9 */
+    -webkit-transform: rotate(45deg); /* Safari */
+    transform: rotate(45deg); /* Standard syntax */
+}
+
+footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    height: 2em;
+}
