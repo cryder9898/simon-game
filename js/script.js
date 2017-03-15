@@ -12,39 +12,71 @@ $(document).ready(function () {
     var colors = ['green','red','yellow','blue'];
     var strict = false;
     
-    var run;
-    
-    function reset() {
-        pattern = [];
-        attempt = [];
-        count = 0;   
-    }
-    
-    function actBtn(color) {
-        $('#' + color).addClass('onBtn');
-        sounds[colors.indexOf(color)].play();
-        setTimeout(function () {
-            $('#' + color).removeClass('onBtn');
-        }, 200);
-    }
-    
-    function newGame() {
-        reset();
-        count++;
-        let color = getRandomColor();
-        // add color 
-        pattern.push(color);
-        actBtn(color);
-    }
-    
+    // generates random color
     function getRandomColor() {
         return colors[Math.floor(Math.random() * colors.length)];
     }
     
-    function runPattern() {
+    
+    // resets vars and text
+    function reset() {
+        $('#level').text('');
+        // to test
+        pattern = ['green', 'yellow', 'blue', 'blue', 'red', 'red'];
+        //pattern = [];
+        attempt = [];
+        count = 0;   
+    }
+    
+    //  simulates button push
+    function pushBtn(color) {
+        $('#' + color).addClass('onBtn');
+        sounds[colors.indexOf(color)].play();
+        setTimeout(function () {
+            $('#' + color).removeClass('onBtn');
+        }, 100);
+    }
+    
+    // displays generated button pattern
+    function displayPattern() {
+        let i = 0;
         run = setInterval(function () {
-            
-        }, 500);
+            pushBtn(pattern[i]);
+            i++;
+            if (i > pattern.length) {
+                clearInterval(run);
+            }
+        }, 600);
+    }
+    
+    //not working yet, working on this one
+    function playerTurn() {
+        $('.btn').click(function () {
+            let color = $(this).attr('id');
+            attempt.push(color);
+            pushBtn(color);
+            if (pattern[pattern.length - 1] === attempt[attempt.length - 1]) {
+                console.log("correct");
+            } else {
+                console.log("wrong!");
+                if (strict) {
+                    newGame();
+                }
+                displayPattern();
+            }
+        });
+    }
+    
+    // runs new game)
+    function newGame() {
+        reset();
+        count++;
+        $('#level').text(count);
+        let color = getRandomColor();
+        // add color 
+        pattern.push(color);
+        displayPattern();
+        playerTurn();
     }
     
     $('.middleCircle').click(function() {
