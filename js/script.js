@@ -44,7 +44,11 @@ $(document).ready(function () {
         console.log(player[player.length - 1] + ", " + pattern[iter]);
         if (player[player.length - 1] !== pattern[iter]) {
             console.log("wrong!");
-            $('.middleCircle').click();
+            if (strict) {
+                $('#start').click();
+            } else {
+                displayPattern();
+            }
         } else {
             console.log('good move!')
             iter++;
@@ -73,6 +77,7 @@ $(document).ready(function () {
             }
         }, 600);
         player = [];
+        iter = 0;
     }
     
     // adds next color btn to pattern
@@ -87,7 +92,6 @@ $(document).ready(function () {
         setTimeout(function () {
             level++;
             $('#level').text(level);
-            iter = 0;
             addPattern();
             displayPattern();
         }, 300);
@@ -102,7 +106,7 @@ $(document).ready(function () {
     
     // buttons cannot be clicked yet
     $('.btn').addClass('inactive');
-    $('.middleCircle').click(function() {
+    $('#start').click(function() {
         if ($('#start').text() === 'Start') {
             $('#start').text('Reset');
             newGame();
