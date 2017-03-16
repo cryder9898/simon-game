@@ -84,11 +84,13 @@ $(document).ready(function () {
     
     function nextLevel() {
         console.log('nextlevel');
-        level++;
-        iter = 0;
-        $('#level').text(level);
-        addPattern();
-        displayPattern();
+        setTimeout(function () {
+            level++;
+            $('#level').text(level);
+            iter = 0;
+            addPattern();
+            displayPattern();
+        }, 300);
     }
     
     // runs new game
