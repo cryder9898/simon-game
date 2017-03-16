@@ -1,8 +1,8 @@
 $(document).ready(function () {
     
     var pattern = [],
-        attempt = [],
-        count = 0,
+        player = [],
+        level = 0,
         greenSound = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3'),
         redSound = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3'),
         yellowSound = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3'),
@@ -11,6 +11,7 @@ $(document).ready(function () {
     var sounds = [greenSound, redSound, yellowSound, blueSound];
     var colors = ['green','red','yellow','blue'];
     var strict = false;
+    var iter = 0;
     
     // generates random color
     function getRandomColor() {
@@ -20,12 +21,11 @@ $(document).ready(function () {
     
     // resets vars and text
     function reset() {
+        iter = 0;  
         $('#level').text('');
-        // to test
-        pattern = ['green', 'yellow', 'blue', 'blue', 'red', 'red'];
-        //pattern = [];
-        attempt = [];
-        count = 0;   
+        pattern = [];
+        player = [];
+        level = 0;   
     }
     
     //  simulates button push
@@ -37,46 +37,64 @@ $(document).ready(function () {
         }, 100);
     }
     
+    // player presses buttons and is checked    
+    function playerTurn() {
+        console.log("playerTurn");
+        console.log(player[player.length - 1] + ", " + pattern[iter]);
+        if (player[player.length - 1] !== pattern[iter]) {
+            console.log("wrong!");
+            $('.middleCircle').click();
+        } else {
+            console.log('good move!')
+            iter++;
+            var check = player.length === pattern.length;
+            if (check) {
+                if (level == 20){
+                    alert('You won! Congrats.');
+                } else {
+                    nextLevel();
+                }
+            }
+        }
+    }
+    
     // displays generated button pattern
     function displayPattern() {
-        let i = 0;
+        console.log("displayPattern");
+        $('.btn').addClass('inactive');
+        var i = 0;
         run = setInterval(function () {
             pushBtn(pattern[i]);
             i++;
-            if (i > pattern.length) {
+            if (i >= pattern.length) {
                 clearInterval(run);
+                $('.btn').removeClass('inactive');
             }
         }, 600);
+        player = [];
     }
     
-    //not working yet, working on this one
-    function playerTurn() {
-        $('.btn').click(function () {
-            let color = $(this).attr('id');
-            attempt.push(color);
-            pushBtn(color);
-            if (pattern[pattern.length - 1] === attempt[attempt.length - 1]) {
-                console.log("correct");
-            } else {
-                console.log("wrong!");
-                if (strict) {
-                    newGame();
-                }
-                displayPattern();
-            }
-        });
-    }
-    
-    // runs new game)
-    function newGame() {
-        reset();
-        count++;
-        $('#level').text(count);
-        let color = getRandomColor();
-        // add color 
+    // adds next color btn to pattern
+    function addPattern() {
+        console.log('addPattern');
+        var color = getRandomColor(); 
         pattern.push(color);
         displayPattern();
-        playerTurn();
+    }
+    
+    function nextLevel() {
+        console.log('nextlevel');
+        level++;
+        iter = 0;
+        $('#level').text(level);
+        addPattern();
+    }
+    
+    // runs new game
+    function newGame() {
+        console.log('newGame');
+        reset();
+        nextLevel();
     }
     
     $('.middleCircle').click(function() {
@@ -88,4 +106,13 @@ $(document).ready(function () {
             reset();
         }
     });
+
+    $('.btn').click(function () {
+        var color = $(this).attr('id');
+        player.push(color);
+        pushBtn(color);
+        console.log('player: ' + player + "\npattern: " + pattern + "\niter: " + iter);
+        playerTurn();
+    });
+    
 });
