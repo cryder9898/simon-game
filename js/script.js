@@ -100,6 +100,7 @@ $(document).ready(function () {
         nextLevel();
     }
     
+    // buttons cannot be clicked yet
     $('.btn').addClass('inactive');
     $('.middleCircle').click(function() {
         if ($('#start').text() === 'Start') {
@@ -111,12 +112,24 @@ $(document).ready(function () {
         }
     });
 
+    // all button presses
     $('.btn').click(function () {
         var color = $(this).attr('id');
         player.push(color);
         pushBtn(color);
         console.log('player: ' + player + "\npattern: " + pattern + "\niter: " + iter);
         playerTurn();
+    });
+    
+    // strict button
+    $('#strict').click(function () {
+        if (strict) {
+            $('#strict').css('background-color', '#000000');
+            strict = false;
+        } else {
+            $('#strict').css('background-color', '#d50000');
+            strict = true;
+        }
     });
     
 });
