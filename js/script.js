@@ -21,6 +21,7 @@ $(document).ready(function () {
     
     // resets vars and text
     function reset() {
+        $('.btn').addClass('inactive');
         iter = 0;  
         $('#level').text('');
         pattern = [];
@@ -79,7 +80,6 @@ $(document).ready(function () {
         console.log('addPattern');
         var color = getRandomColor(); 
         pattern.push(color);
-        displayPattern();
     }
     
     function nextLevel() {
@@ -88,6 +88,7 @@ $(document).ready(function () {
         iter = 0;
         $('#level').text(level);
         addPattern();
+        displayPattern();
     }
     
     // runs new game
@@ -97,6 +98,7 @@ $(document).ready(function () {
         nextLevel();
     }
     
+    $('.btn').addClass('inactive');
     $('.middleCircle').click(function() {
         if ($('#start').text() === 'Start') {
             $('#start').text('Reset');
