@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Anton');
+
 body {
+    color: #212121;
     background-color: #bdbdbd;
-    font-family: sans-serif;
+    font-family: Anton, sans-serif;
     text-align: center;
     width: 100%
 }
@@ -27,9 +30,10 @@ h2 {
 }
 
 .middleCircle {
+    border-style: solid;
     position: absolute;
     top: 5.5em;
-    left: 7em;
+    left: 6.7em;
     height: 200px;
     width: 200px;
     background-color: #757575;
